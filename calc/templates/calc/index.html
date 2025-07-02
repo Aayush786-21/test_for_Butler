@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+</head>
+<body>
+  <h1>Calculator</h1>
+  <form method="post">
+    {% csrf_token %}
+    <input type="number" name="num1" step="any" required value="{{ num1 }}">
+    <input type="number" name="num2" step="any" required value="{{ num2 }}">
+    <select name="operation">
+      <option value="add" {% if operation == 'add' %}selected{% endif %}>+</option>
+      <option value="subtract" {% if operation == 'subtract' %}selected{% endif %}>-</option>
+      <option value="multiply" {% if operation == 'multiply' %}selected{% endif %}>*</option>
+      <option value="divide" {% if operation == 'divide' %}selected{% endif %}>/</option>
+    </select>
+    <button type="submit">Calculate</button>
+  </form>
+  {% if error %}
+    <p style="color: red;">Error: {{ error }}</p>
+  {% endif %}
+  {% if result is not None %}
+    <h2>Result: {{ result }}</h2>
+  {% endif %}
+</body>
+</html>
